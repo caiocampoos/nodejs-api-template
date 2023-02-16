@@ -1,9 +1,6 @@
 
 # TS-Api-Template
-```markdown
-![CI](https://img.shields.io/badge/build-passing-brightgreen?logo=appveyor&logoColor=white)
-
-Simple API template to help speed up development of new Applications
+[![CI](https://github.com/caiocampoos/ts-api-template/actions/workflows/CI.yml/badge.svg?branch=main&event=status)](https://github.com/caiocampoos/ts-api-template/actions/workflows/CI.yml)
 
   
 

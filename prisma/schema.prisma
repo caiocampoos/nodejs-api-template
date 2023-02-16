@@ -9,3 +9,42 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+
+model Doctor {
+  id        String         @id @default(uuid()) @db.Uuid
+  email     String         @unique
+  name      String
+  password  String
+  salt      String
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
+  consulta  Consulta[]
+}
+
+
+model Consulta {
+  id              String          @id @default(uuid()) @db.Uuid
+  doctor          Doctor          @relation(fields: [doctorId], references: [id])
+  doctorId        String          @db.Uuid
+  apointmentDate  String          @unique
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+  pacente         Paciente?
+}
+
+
+model Paciente {
+  id          String         @id @default(uuid()) @db.Uuid
+  consulta    Consulta?      @relation(fields: [consultaId], references: [id])
+  consultaId  String         @unique @db.Uuid
+  email       String         @unique
+  name        String
+  phone       String
+  birthDate   DateTime       @db.Timestamp
+  sex         String
+  height      Float          @default(1.1)
+  weight      Float          @default(10.5) 
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+}

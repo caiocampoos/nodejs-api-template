@@ -18,15 +18,15 @@ services:
     container_name: postgres
     networks:
       - webnet
-    env_file:
-      - .env
-    expose:
-      - "5436"
-    ports:
-      - 5436:5436
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: mydbDoctor
     volumes:
-      - pgdata:/var/lib/postgresql/data
+      - postgres-data:/var/lib/postgresql/data
+    restart: unless-stopped
 networks:
   webnet:
 volumes:
+  postgres-data:
   pgdata:

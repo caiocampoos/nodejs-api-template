@@ -26,11 +26,11 @@ WORKDIR /usr/app
 ARG APP_ENV
 COPY --from=builder /app/build ./build
 COPY package.json ./
+COPY prisma ./prisma/
+
 COPY .env$APP_ENV .env
 RUN npm install -g pnpm
 RUN pnpm install --prod
 USER node
 ENV NODE_ENV="production"
-
-
 CMD ["npm", "start"]

@@ -19,7 +19,6 @@ This api is built with a modular arquitechture aproach, new functionality is add
 ### :rocket: Requirements
 - Docker 
 - Docker-compose (for local development)
-- NodeJs >= 18
   
 ### :checkered_flag: Getting started
  ```

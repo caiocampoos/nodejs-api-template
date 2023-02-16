@@ -13,6 +13,7 @@
     "dev": "tsx watch src .env | pino-pretty --colorize",
     "pretest": "npm run build",
     "test": "vitest",
+    "test:init": "./scripts/run-integration.sh",
     "test:watch": "vitest -w"
   },
   "repository": {

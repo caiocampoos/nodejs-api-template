@@ -21,33 +21,32 @@ This api is built with a modular arquitechture aproach, new functionality is add
 - Docker-compose (for local development)
   
 ### :checkered_flag: Getting started
- ```
+
 
 docker-compose up -d --build
 
 ### Run application
-```
-run
 
+```
 docker-compose up -d --build
 
 Api is running on:
 
 http://0.0.0.0:3001/docs
 
-
 ```
 
-### Run tests
 
-```
+### Run Integration tests
+
 change .env DB url to test URL, instructions on comments in the .env file
 
-run
 
+
+```
 docker-compose up -d --build
 
 run tests
-npm run test
+npm run test:init
 
 ```

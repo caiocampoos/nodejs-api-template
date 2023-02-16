@@ -5,7 +5,7 @@ describe('GET /', () => {
   test('Should return im OK!', async () => {
     const response = await server.inject({
       method: 'GET',
-      path: '/healthcheck',
+      path: '/',
     });
     expect(response.statusCode).eq(200);
     expect(response.json()).deep.eq({ status: 'im OK!' });

@@ -9,7 +9,6 @@ export default defineConfig({
   resolve: {
     alias: {
       auth: '/src/auth',
-      quotes: '/src/quotes',
       lib: '/src/lib'
     }
   }

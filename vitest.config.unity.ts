@@ -5,7 +5,11 @@ export default defineConfig({
     include: [
       'src/**/*.test.ts',
       '!src/tests'
+    ],
+    exclude: [
+      '/tests/routes/auth.test.ts'
     ]
+    
   },
   resolve: {
     alias: {

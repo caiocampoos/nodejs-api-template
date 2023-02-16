@@ -1,6 +1,6 @@
 
 # TS-Api-Template
-[![CI](https://github.com/caiocampoos/ts-api-template/actions/workflows/CI.yml/badge.svg?branch=main&event=status)](https://github.com/caiocampoos/ts-api-template/actions/workflows/CI.yml)
+[![CI](https://github.com/caiocampoos/ts-api-template/actions/workflows/CI.yml/badge.svg)](https://github.com/caiocampoos/ts-api-template/actions/workflows/CI.yml)
 
   
 

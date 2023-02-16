@@ -19,32 +19,32 @@ model Doctor {
   salt      String
   createdAt DateTime       @default(now())
   updatedAt DateTime       @updatedAt
-  consulta  Consulta[]
+  consulta  Appointment[]
 }
 
 
-model Consulta {
+model Appointment {
   id              String          @id @default(uuid()) @db.Uuid
   doctor          Doctor          @relation(fields: [doctorId], references: [id])
   doctorId        String          @db.Uuid
   apointmentDate  String          @unique
   createdAt       DateTime        @default(now())
   updatedAt       DateTime        @updatedAt
-  pacente         Paciente?
+  patient         Patient?
 }
 
 
-model Paciente {
-  id          String         @id @default(uuid()) @db.Uuid
-  consulta    Consulta?      @relation(fields: [consultaId], references: [id])
-  consultaId  String         @unique @db.Uuid
-  email       String         @unique
-  name        String
-  phone       String
-  birthDate   DateTime       @db.Timestamp
-  sex         String
-  height      Float          @default(1.1)
-  weight      Float          @default(10.5) 
-  createdAt   DateTime       @default(now())
-  updatedAt   DateTime       @updatedAt
+model Patient {
+  id              String            @id @default(uuid()) @db.Uuid
+  apppontment     Appointment?      @relation(fields: [appointmentId], references: [id])
+  appointmentId   String            @unique @db.Uuid
+  email           String            @unique
+  name            String
+  phone           String
+  birthDate       DateTime          @db.Timestamp
+  sex             String
+  height          Float             @default(1.1)
+  weight          Float             @default(10.5) 
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
 }

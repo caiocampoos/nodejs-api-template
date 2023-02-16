@@ -1,14 +1,14 @@
 import fastify from 'fastify';
-import config from './plugins/config.js';
-import { doctorSchemas } from './modules/doctor/doctor.schema.js'
-import doctorRoutes from './modules/doctor/doctor.routes.js'
-import { withRefResolver } from "fastify-zod";
 import fjwt, { JWT } from "@fastify/jwt";
 import swagger from '@fastify/swagger'
+import swaggerUI from '@fastify/swagger-ui'
+import { withRefResolver } from "fastify-zod";
+import config from './plugins/config.js';
+import doctorRoutes from './modules/doctor/doctor.routes.js'
+import { doctorSchemas } from './modules/doctor/doctor.schema.js'
 
 import { FastifyRequest, FastifyReply } from "fastify";
 
-const version = 'v1'
 declare module "fastify" {
   interface FastifyRequest {
     jwt: JWT;
@@ -53,31 +53,35 @@ server.addHook("preHandler", (req, reply, next) => {
   req.jwt = server.jwt;
   return next();
 });
-
 for (const schema of [...doctorSchemas ]) {
   server.addSchema(schema);
 }
 
-server.get("/healthcheck", async function () {
+server.get("/", async function () {
   return { status: "im OK!" };
 });
 
-await server.register(
+server.register(
   swagger,
   withRefResolver({
-    routePrefix: "/docs",
-    exposeRoute: true,
-    staticCSP: true,
     openapi: {
       info: {
-        title: "Fastify API",
-        description: "API for some products",
-        version,
+        title: "TS Api Template",
+        description:
+          "API template Fastify",
+        version: "1.0.0",
       },
     },
   })
 );
+
+server.register(swaggerUI, {
+  routePrefix: "/docs",
+  staticCSP: false,
+})
+
 await server.register(doctorRoutes, { prefix: "api/doctor" });
 await server.ready();
+server.swagger()
 
 export default server;

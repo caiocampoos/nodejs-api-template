@@ -44,7 +44,8 @@ const appointmentsResponseSchema = z.array(appointmentResponseSchema);
 export type CreateAppointmentInput = z.infer<typeof createAppointmentSchema>;
 export type GetAppointmentbyDoctor = z.infer<typeof getappointmentbyDoctorSchema>;
 
-export const { schemas: appointmentSchemas, $ref } = buildJsonSchemas({
+export const { schemas: appointmentSchemas, $ref } = buildJsonSchemas(
+  {
   createAppointmentSchema,
   appointmentResponseSchema,
   appointmentsResponseSchema,

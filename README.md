@@ -50,3 +50,7 @@ run tests
 npm run test:init
 
 ```
+
+
+
+### For more information on local tests and db schemas go to [Tests and Schemas](https://github.com/caiocampoos/nodejs-api-template/blob/1622e43bea71d16cc4461cf0332755f0a2bc85f1/docs/test-documentation.md)

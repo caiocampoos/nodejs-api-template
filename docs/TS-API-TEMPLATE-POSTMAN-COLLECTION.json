@@ -1,0 +1,349 @@
+{
+	"info": {
+		"_postman_id": "a957353d-7564-4578-bad0-a9cb82e8ae98",
+		"name": "TS-API-TEMPLATE",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "7643144"
+	},
+	"item": [
+		{
+			"name": "Doctor",
+			"item": [
+				{
+					"name": "Create Doctor",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let firstName = pm.variables.replaceIn(\"{{$randomFirstName}}\")",
+									"let lastName = pm.variables.replaceIn(\"{{$randomFirstName}}\")",
+									"",
+									"pm.environment.set(\"name\", `${firstName} ${lastName}`)",
+									"",
+									"pm.environment.set(\"password\", pm.variables.replaceIn('{{$randomPassword}}'))",
+									"",
+									"pm.environment.set(\"email\", `${firstName.toLowerCase()}.${lastName.toLowerCase()}@example.com`)",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"doctorId\", jsonData.id)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"{{email}}\",\n    \"name\": \"{{name}}\",\n    \"password\": \"{{password}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/doctor",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"doctor"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find Doctor",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/doctor",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"doctor"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"accessToken\", jsonData.accessToken)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"{{email}}\",\n    \"password\": \"{{password}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/doctor/login",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"doctor",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Appointment",
+			"item": [
+				{
+					"name": "Create Appointment",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"doctorId\": \"{{doctorId}}\",\n  \"appointmentDate\": \"01/01/2023 10:25\",\n  \"patientId\": \"{{patientId}}\",\n  \"notes\": \"test\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/appointments",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"appointments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Appointments",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"doctorId\": \"{{doctorId}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/appointments",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"appointments"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Patient",
+			"item": [
+				{
+					"name": "Create Patient",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.sendRequest(\"https://randomuser.me/api/?nat=us&inc=name\", (err, res) => {",
+									"    pm.environment.set('name', res.json().results[0].name.first)",
+									"})",
+									"pm.sendRequest(\"https://randomuser.me/api/?nat=us&inc=phone\", (err, res) => {",
+									"    pm.environment.set('phoneNumber', res.json().results[0].phone)",
+									"})",
+									"pm.sendRequest(\"https://randomuser.me/api/?nat=us&inc=dob\", (err, res) => {",
+									"    pm.environment.set('dob', res.json().results[0].dob.date)",
+									"})",
+									"pm.sendRequest(\"https://randomuser.me/api/?nat=us&inc=email\", (err, res) => {",
+									"    pm.environment.set('email', res.json().results[0].email)",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"patientId\", jsonData.id)",
+									"postman.setEnvironmentVariable(\"patientEmail\", jsonData.email)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"{{email}}\",\n  \"name\": \"{{name}}\",\n  \"phone\": \"{{phoneNumber}}\",  \n  \"birthDate\": \"{{dob}}\",\n  \"sex\": \"M\",\n  \"height\": 1.60,\n  \"weight\": 55.0\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/patient",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"patient"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get patients",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{host}}/api/patient",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"patient"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Patient",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"{{patientId}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/patient",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"patient"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

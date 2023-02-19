@@ -19,7 +19,7 @@ model Doctor {
   salt      String
   createdAt DateTime       @default(now())
   updatedAt DateTime       @updatedAt
-  consulta  Appointment[]
+  appointment  Appointment[]
 }
 
 
@@ -28,6 +28,7 @@ model Appointment {
   doctor          Doctor          @relation(fields: [doctorId], references: [id])
   doctorId        String          @db.Uuid
   appointmentDate String          @unique
+  notes           String          @db.Text
   createdAt       DateTime        @default(now())
   updatedAt       DateTime        @updatedAt
   patient         Patient         @relation(fields: [patientId], references: [id])

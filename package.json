@@ -50,6 +50,7 @@
     "jsonwebtoken": "^9.0.0",
     "pg": "^8.9.0",
     "prisma": "^4.10.1",
+    "prisma-dbml-generator": "^0.10.0",
     "zod": "^3.20.6",
     "zod-to-json-schema": "^3.20.4"
   },

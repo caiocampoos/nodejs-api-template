@@ -12,6 +12,7 @@ const appointmentInput = {
     invalid_type_error: "Date must be dd/mm/yyyy",
   }).regex(new RegExp(reGex)),
   patientId: z.string().uuid(),
+  notes: z.string()
 };
 
 const appointmentGenerated = {

@@ -46,11 +46,12 @@
     "fastify-plugin": "^3.0.1",
     "fastify-postgres": "^3.7.0",
     "fastify-swagger": "^5.2.0",
-    "fastify-zod": "^1.2.0",
+    "fastify-zod": "0.0.2",
     "jsonwebtoken": "^9.0.0",
     "pg": "^8.9.0",
     "prisma": "^4.10.1",
-    "zod": "^3.20.6"
+    "zod": "^3.20.6",
+    "zod-to-json-schema": "^3.20.4"
   },
   "devDependencies": {
     "@types/fastify-jwt": "^0.8.1",

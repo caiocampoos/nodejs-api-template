@@ -27,17 +27,17 @@ model Appointment {
   id              String          @id @default(uuid()) @db.Uuid
   doctor          Doctor          @relation(fields: [doctorId], references: [id])
   doctorId        String          @db.Uuid
-  apointmentDate  String          @unique
+  appointmentDate String          @unique
   createdAt       DateTime        @default(now())
   updatedAt       DateTime        @updatedAt
-  patient         Patient?
+  patient         Patient         @relation(fields: [patientId], references: [id])
+  patientId       String          @db.Uuid
 }
 
 
 model Patient {
   id              String            @id @default(uuid()) @db.Uuid
-  apppontment     Appointment?      @relation(fields: [appointmentId], references: [id])
-  appointmentId   String            @unique @db.Uuid
+  appointment     Appointment[]      
   email           String            @unique
   name            String
   phone           String

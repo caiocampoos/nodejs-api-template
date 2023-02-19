@@ -5,7 +5,12 @@ import swaggerUI from '@fastify/swagger-ui'
 import { withRefResolver } from "fastify-zod";
 import config from './plugins/config.js';
 import doctorRoutes from './modules/doctor/doctor.routes.js'
+import appointmentRoutes from './modules/appoitment/appointment.routes.js'
+import patientRoutes from './modules/patient/patient.routes.js'
 import { doctorSchemas } from './modules/doctor/doctor.schema.js'
+import { appointmentSchemas } from './modules/appoitment/appointment.schema.js';
+import { patientSchemas } from './modules/patient/patient.schema.js';
+
 
 import { FastifyRequest, FastifyReply } from "fastify";
 
@@ -53,7 +58,7 @@ server.addHook("preHandler", (req, reply, next) => {
   req.jwt = server.jwt;
   return next();
 });
-for (const schema of [...doctorSchemas ]) {
+for (const schema of [ ...doctorSchemas, ...appointmentSchemas, ...patientSchemas ]) {
   server.addSchema(schema);
 }
 
@@ -81,6 +86,8 @@ server.register(swaggerUI, {
 })
 
 await server.register(doctorRoutes, { prefix: "api/doctor" });
+await server.register(appointmentRoutes, {prefix: "api/appointments" })
+await server.register(patientRoutes, {prefix: "api/patient" })
 await server.ready();
 server.swagger()
 

@@ -12,20 +12,20 @@ CREATE TABLE "Doctor" (
 );
 
 -- CreateTable
-CREATE TABLE "Consulta" (
+CREATE TABLE "Appointment" (
     "id" UUID NOT NULL,
     "doctorId" UUID NOT NULL,
-    "apointmentDate" TEXT NOT NULL,
+    "appointmentDate" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
+    "patientId" UUID NOT NULL,
 
-    CONSTRAINT "Consulta_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "Appointment_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
-CREATE TABLE "Paciente" (
+CREATE TABLE "Patient" (
     "id" UUID NOT NULL,
-    "consultaId" UUID NOT NULL,
     "email" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "phone" TEXT NOT NULL,
@@ -36,23 +36,20 @@ CREATE TABLE "Paciente" (
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
-    CONSTRAINT "Paciente_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "Patient_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Doctor_email_key" ON "Doctor"("email");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Consulta_apointmentDate_key" ON "Consulta"("apointmentDate");
+CREATE UNIQUE INDEX "Appointment_appointmentDate_key" ON "Appointment"("appointmentDate");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Paciente_consultaId_key" ON "Paciente"("consultaId");
-
--- CreateIndex
-CREATE UNIQUE INDEX "Paciente_email_key" ON "Paciente"("email");
+CREATE UNIQUE INDEX "Patient_email_key" ON "Patient"("email");
 
 -- AddForeignKey
-ALTER TABLE "Consulta" ADD CONSTRAINT "Consulta_doctorId_fkey" FOREIGN KEY ("doctorId") REFERENCES "Doctor"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Appointment" ADD CONSTRAINT "Appointment_doctorId_fkey" FOREIGN KEY ("doctorId") REFERENCES "Doctor"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Paciente" ADD CONSTRAINT "Paciente_consultaId_fkey" FOREIGN KEY ("consultaId") REFERENCES "Consulta"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Appointment" ADD CONSTRAINT "Appointment_patientId_fkey" FOREIGN KEY ("patientId") REFERENCES "Patient"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

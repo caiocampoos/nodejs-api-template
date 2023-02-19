@@ -5,7 +5,7 @@ This diagram is only relevant for the current implementation of DB for this proj
 
 This project is developed in the bring your own database mindset, in the future this file will track the current implementation and use case.
 
-<iframe width="560" height="315" src='https://dbdiagram.io/embed/63f2965f296d97641d822037'> </iframe>
+![Data Base Diagram](https://github.com/caiocampoos/nodejs-api-template/blob/main/docs/Doctor%20Appointment.png)
 
 ### Current References
 

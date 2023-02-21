@@ -5,8 +5,7 @@ WORKDIR /app
 COPY package.json pnpm-lock.yaml ./
 COPY prisma ./prisma/
 
-RUN npm install -g pnpm
-RUN pnpm install --no-frozen-lockfile
+RUN npm install --legacy-peer-deps
 
 FROM node:18-alpine AS builder
 ARG APP_ENV
@@ -29,8 +28,7 @@ COPY package.json ./
 COPY prisma ./prisma/
 
 COPY .env$APP_ENV .env
-RUN npm install -g pnpm
-RUN pnpm install --prod
+RUN npm install --legacy-peer-deps --prod
 USER node
 ENV NODE_ENV="production"
 

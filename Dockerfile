@@ -13,8 +13,10 @@ FROM node:18-alpine AS builder
 ARG APP_ENV
 WORKDIR /app
 COPY . .
-RUN true
 COPY .env$APP_ENV .env
+
+RUN true
+
 COPY --from=deps /app/node_modules ./node_modules
 
 EXPOSE 3001

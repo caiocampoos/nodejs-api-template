@@ -1,7 +1,7 @@
 
 
 import prisma from "../../utils/prisma.js";
-import { CreateAppointmentInput, GetAppointmentbyDoctor } from "./appointment.schema.js";
+import { CreateAppointmentInput, GetAppointmentbyPatient } from "./appointment.schema.js";
 
 export async function createAppointment(
   data: CreateAppointmentInput & { doctorId: string } & { patientId: string }
@@ -11,12 +11,14 @@ export async function createAppointment(
   });
 }
 
-export async function getAppointmentbyDoctor(
-  data: GetAppointmentbyDoctor
+
+
+export async function getAppointmentbyPatient(
+  data: GetAppointmentbyPatient
 ) {
   return prisma.appointment.findMany({
     where: {
-      doctorId: data.doctorId
+      patientId: data.patientId
     }
   });
 }

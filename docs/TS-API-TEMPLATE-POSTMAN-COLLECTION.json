@@ -196,7 +196,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"doctorId\": \"{{doctorId}}\"\n}",
+							"raw": "{\n    \"patientId\": \"{{patientId}}\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"

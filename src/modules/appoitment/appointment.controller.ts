@@ -1,6 +1,6 @@
 import { FastifyReply, FastifyRequest } from "fastify";
-import { CreateAppointmentInput, GetAppointmentbyDoctor } from "./appointment.schema.js";
-import { createAppointment, getAppointmentbyDoctor } from "./appointment.service.js";
+import { CreateAppointmentInput, GetAppointmentbyPatient } from "./appointment.schema.js";
+import { createAppointment, getAppointmentbyPatient } from "./appointment.service.js";
 
 export async function creatAppointmentHandler(
   request: FastifyRequest<{
@@ -18,10 +18,10 @@ export async function creatAppointmentHandler(
 
 export async function getAppointmentByDoctorsHandler(
   request: FastifyRequest<{
-    Body: GetAppointmentbyDoctor;
+    Body: GetAppointmentbyPatient;
   }>
 ) {
-  const appointment = await getAppointmentbyDoctor({
+  const appointment = await getAppointmentbyPatient({
     ...request.body
   });
 

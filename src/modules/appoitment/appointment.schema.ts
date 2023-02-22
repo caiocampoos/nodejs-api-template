@@ -20,12 +20,12 @@ const appointmentGenerated = {
   updatedAt: z.string(),
 };
 
-const getAppointmentbyDoctor  = {
-  doctorId: z.string().uuid()
+const getAppointmentbyPatient  = {
+  patientId: z.string().uuid()
 }
 
-const getappointmentbyDoctorSchema = z.object({
-  ...getAppointmentbyDoctor
+const getappointmentbyPatientSchema = z.object({
+  ...getAppointmentbyPatient
 })
 
 const createAppointmentSchema = z.object({
@@ -36,13 +36,13 @@ const createAppointmentSchema = z.object({
 const appointmentResponseSchema = z.object({
   ...appointmentInput,
   ...appointmentGenerated,
-  ...getAppointmentbyDoctor,
+  ...getAppointmentbyPatient,
 });
 
 const appointmentsResponseSchema = z.array(appointmentResponseSchema);
 
 export type CreateAppointmentInput = z.infer<typeof createAppointmentSchema>;
-export type GetAppointmentbyDoctor = z.infer<typeof getappointmentbyDoctorSchema>;
+export type GetAppointmentbyPatient = z.infer<typeof getappointmentbyPatientSchema>;
 
 export const { schemas: appointmentSchemas, $ref } = buildJsonSchemas(
   {

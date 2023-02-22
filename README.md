@@ -1,6 +1,6 @@
 
 # TS-Api-Template
-[![CI](https://github.com/caiocampoos/ts-api-template/actions/workflows/CI.yml/badge.svg?branch=main)](https://github.com/caiocampoos/ts-api-template/actions/workflows/CI.yml)
+[![Tests](https://github.com/caiocampoos/ts-api-template/actions/workflows/CI.yml/badge.svg?branch=main)](https://github.com/caiocampoos/ts-api-template/actions/workflows/CI.yml)
 [![Deploy to Amazon ECS](https://github.com/caiocampoos/ts-api-template/actions/workflows/deploy.yml/badge.svg)](https://github.com/caiocampoos/ts-api-template/actions/workflows/deploy.yml)
 
   

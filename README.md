@@ -18,15 +18,17 @@ This api is built with a modular arquitechture aproach, new functionality is add
 - Code base is bigger than other aproachs, less abstraction in favor of code clarity.
 
 ### :rocket: Requirements
+
 - Docker 
 - Docker-compose (for local development)
+- nodejs >=16
   
 ### :checkered_flag: Getting started
 
 
 docker-compose up -d --build
 
-### Run application
+### Run development Environment 
 
 ```
 docker-compose up -d --build
@@ -37,11 +39,9 @@ http://0.0.0.0:3001/docs
 
 ```
 
-
 ### Run Integration tests
 
 change .env DB url to test URL, instructions on comments in the .env file
-
 
 
 ```

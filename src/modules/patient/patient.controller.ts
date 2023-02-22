@@ -1,6 +1,6 @@
 import { FastifyReply, FastifyRequest } from "fastify";
-import { CreatePatientInput, DeletePatientInput } from "./patient.schema.js";
-import { createPatient, getPatient, deletePatient } from "./patient.service.js";
+import { CreatePatientInput, DeletePatientInput, UpdatePatientInput } from "./patient.schema.js";
+import { createPatient, getPatient, deletePatient, updatePatient } from "./patient.service.js";
 
 export async function creatPatientHandler(
   request: FastifyRequest<{
@@ -20,6 +20,18 @@ export async function deletetientHandler(
   }>
 ) {
   const patient = await deletePatient({
+    ...request.body
+  });
+
+  return patient;
+}
+
+export async function updatePatientHandler(
+  request: FastifyRequest<{
+    Body: UpdatePatientInput;
+  }>
+) {
+  const patient = await updatePatient({
     ...request.body
   });
 

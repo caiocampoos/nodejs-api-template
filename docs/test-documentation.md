@@ -23,12 +23,12 @@ Appointments cannot be created with the same data and time
 
 Download the files 
 
-https://github.com/caiocampoos/nodejs-api-template/blob/main/docs/TS-API-TEMPLATE-POSTMAN-COLLECTION.json
+https://github.com/caiocampoos/nodejs-api-template/blob/main/docs/TS-API-TEMPLATE.postman_collection.json
 
 
 and 
 
-https://github.com/caiocampoos/nodejs-api-template/blob/main/docs/TS-API-TEMPLATE-POSTMAN-ENVIRONMENT.json
+https://github.com/caiocampoos/nodejs-api-template/blob/main/docs/TS%20Api%20Template%20Enviroment.postman_environment.json
 
 
 and import to postman.
@@ -43,4 +43,11 @@ Start at Doctor endpoint create a doctor in the Create Doctor request, the pre-r
 Next go to create Patient and do the same, you can create and delete Patients, the patient deleted will be the exat one created previously,
 the scripts will fill the values for you, no need to worry.
 
-The appointment secction the test scripts will fill the appointment with the last doctor created and last patient created, the only field you need to vary is the appointmentDate field.
+The appointment secction the test scripts will fill the appointment with the last doctor created and last patient created, the only field you need to vary is the appointmentDate field and notes.
+
+
+Always remember when testing of the flow Doctor ---> Patient ---> Appointment
+
+For testing purposes with postman is important becaus this way there is no need to fill variables in the body of the requisition the test scripts will do that for you.
+
+Enjoy!

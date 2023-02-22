@@ -1,6 +1,6 @@
 import { FastifyReply, FastifyRequest } from "fastify";
-import { CreateAppointmentInput, GetAppointmentbyPatient } from "./appointment.schema.js";
-import { createAppointment, getAppointmentbyPatient } from "./appointment.service.js";
+import { CreateAppointmentInput, DeleteAppointmentInput, GetAppointmentbyPatientInput, UpdateAppointmentInput, } from "./appointment.schema.js";
+import { createAppointment, getAppointmentbyPatient, deletePatient, UpdateAppointment } from "./appointment.service.js";
 
 export async function creatAppointmentHandler(
   request: FastifyRequest<{
@@ -18,10 +18,34 @@ export async function creatAppointmentHandler(
 
 export async function getAppointmentByDoctorsHandler(
   request: FastifyRequest<{
-    Body: GetAppointmentbyPatient;
+    Body: GetAppointmentbyPatientInput;
   }>
 ) {
   const appointment = await getAppointmentbyPatient({
+    ...request.body
+  });
+
+  return appointment;
+}
+
+export async function deleteAppointmentHandler(
+  request: FastifyRequest<{
+    Body: DeleteAppointmentInput;
+  }>
+) {
+  const appointment = await deletePatient({
+    ...request.body
+  });
+
+  return appointment;
+}
+
+export async function updateAppointmentHandler(
+  request: FastifyRequest<{
+    Body: UpdateAppointmentInput;
+  }>
+) {
+  const appointment = await UpdateAppointment({
     ...request.body
   });
 

@@ -1,6 +1,6 @@
 
 import { FastifyInstance } from "fastify";
-import { creatPatientHandler, deletetientHandler, getPatientsHandler } from "./patient.controller.js";
+import { creatPatientHandler, deletetientHandler, getPatientsHandler, updatePatientHandler } from "./patient.controller.js";
 import { $ref } from "./patient.schema.js";
 
 
@@ -36,11 +36,22 @@ async function patientRoutes(server: FastifyInstance) {
     {
       schema: {
         response: {
-          200: $ref("patientsResponseSchema"),
+          200: $ref("deletePatientSchema"),
         },
       },
     },
     deletetientHandler
+  );
+  server.patch(
+    "/",
+    {
+      schema: {
+        response: {
+          200: $ref("updatePatientSchema"),
+        },
+      },
+    },
+    updatePatientHandler
   );
 }
 

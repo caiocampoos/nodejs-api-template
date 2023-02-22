@@ -1,6 +1,6 @@
 
 import { FastifyInstance } from "fastify";
-import { creatAppointmentHandler, getAppointmentByDoctorsHandler } from "./appointment.controller.js";
+import { creatAppointmentHandler, deleteAppointmentHandler, getAppointmentByDoctorsHandler, updateAppointmentHandler } from "./appointment.controller.js";
 import { $ref } from "./appointment.schema.js";
 
 
@@ -30,6 +30,32 @@ async function appointmentRoutes(server: FastifyInstance) {
     },
 
     getAppointmentByDoctorsHandler
+  );
+  
+  server.delete(
+    "/",
+    {
+      schema: {
+        response: {
+          200: $ref("appointmentsResponseSchema"),
+        },
+      },
+    },
+
+    deleteAppointmentHandler
+  );
+
+  server.patch(
+    "/",
+    {
+      schema: {
+        response: {
+          200: $ref("updateAppointmentSchema"),
+        },
+      },
+    },
+
+    updateAppointmentHandler
   );
 }
 

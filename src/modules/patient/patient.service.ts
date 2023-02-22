@@ -1,7 +1,7 @@
 
 
 import prisma from "../../utils/prisma.js";
-import { CreatePatientInput, DeletePatientInput } from "./patient.schema.js";
+import { CreatePatientInput, DeletePatientInput, UpdatePatientInput  } from "./patient.schema.js";
 import { random } from "../../utils/randomeamail.js"
 
 
@@ -15,7 +15,7 @@ export async function createPatient(
 export async function deletePatient(
   data:DeletePatientInput) {
   const emailRand = random.email(1)[0]
-  prisma.patient.update({
+  return prisma.patient.update({
     where: {
       id: data.id
     },
@@ -25,10 +25,19 @@ export async function deletePatient(
       phone: 'redactedOnDeletion-LGPD'
     }
   })
-  return `Patient ${data.id} Deleted`
 }
 
-export function getPatient() {
+export async function updatePatient(
+  data:UpdatePatientInput) {
+  return prisma.patient.update({
+    where: {
+      id: data.id
+    },
+    data: { ...data }
+  })
+}
+
+export async function getPatient() {
   return prisma.patient.findMany({
     select: {
       id: true,

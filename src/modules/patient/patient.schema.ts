@@ -11,6 +11,11 @@ const patientInput = {
   weight: z.number().positive().default(10.5)
 };
 
+const patientUpdateInput = {
+  id: z.string().uuid(),
+  ...patientInput
+};
+
 const patientGenerated = {
   id: z.string().uuid(),
   createdAt: z.string(),
@@ -24,6 +29,10 @@ const deletePatientSchema = z.object({
   ...deletePatientInput
 });
 
+const updatePatientSchema = z.object({
+  ...patientUpdateInput
+})
+
 const createPatientSchema = z.object({
   ...patientInput,
 });
@@ -31,14 +40,17 @@ const createPatientSchema = z.object({
 const patientResponseSchema = z.object({
   ...patientInput,
   ...patientGenerated,
+  ...patientUpdateInput
 });
 
 const patientsResponseSchema = z.array(patientResponseSchema);
 
 export type CreatePatientInput = z.infer<typeof createPatientSchema>;
+export type UpdatePatientInput = z.infer<typeof updatePatientSchema>;
 export type DeletePatientInput = z.infer<typeof deletePatientSchema>;
 
 export const { schemas: patientSchemas, $ref } = buildJsonSchemas({
+  updatePatientSchema,
   createPatientSchema,
   deletePatientSchema,
   patientResponseSchema,

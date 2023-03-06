@@ -54,4 +54,4 @@ npm run test:init
 
 
 
-### For more information on local tests and db schemas go to [Tests and Schemas](https://github.com/caiocampoos/nodejs-api-template/docs/test-documentation.md)
+### For more information on local tests and db schemas go to [Tests and Schemas](https://github.com/caiocampoos/ts-api-template/blob/main/docs/test-documentation.md)
